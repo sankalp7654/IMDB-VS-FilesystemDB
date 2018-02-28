@@ -9,12 +9,11 @@ import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 
-public class WebCamera extends JFrame{
+public class WebCamera {
 	
-	private static final long serialVersionUID = 1L;
-
 	public static void main(String[] args) throws InterruptedException, IOException {
 
+		// Get default webcam and open it
 		Webcam webcam = Webcam.getDefault();
 		webcam.setViewSize(WebcamResolution.VGA.getSize());
 
@@ -32,12 +31,15 @@ public class WebCamera extends JFrame{
 		window.pack();
 		window.setVisible(true);
 		
-		// get image
+		// Captures the  image
 		BufferedImage image = webcam.getImage();
 
-		// save image to PNG file
-		ImageIO.write(image, "PNG", new File("/Users/Sandeep/Desktop/test.png"));
-		
+		// Save image to PNG file
+		ImageIO.write(image, "PNG", new File("/Users/Sandeep/Documents/eclipse-workspace/user.png"));
+
+		PredictAdmin predictUser = new PredictAdmin();
+		double response = predictUser.getResponse("/Users/Sandeep/Documents/eclipse-workspace/user.png");
+		System.out.println("Predicted User: " + response);
 	}
 }
 

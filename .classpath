@@ -9,5 +9,12 @@
 	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCam/Webcam jar/slf4j-nop-1.7.6.jar"/>
 	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCam/Webcam jar/webcam-capture-0.3.10.jar"/>
 	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCam/Webcam jar/webcam-capture-driver-gstreamer-0.3.13-20180202.082026-3.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/json.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/okhttp-3.4.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/WebCamWithAPI/ClarifaiAPI jar/okio-1.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
