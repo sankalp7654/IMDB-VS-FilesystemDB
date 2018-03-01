@@ -8,7 +8,7 @@ import clarifai2.dto.input.ClarifaiInput;
 import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.prediction.Prediction;
 
-public class PredictAdmin {
+public class PredictAdminViaClarifaiAPI {
 	
 	public double getResponse(String path) {
 		
@@ -29,7 +29,6 @@ public class PredictAdmin {
 		
 		// value=0.21268915 need to extract this value 
 		startIndex = startIndex + 7;
-	//	System.out.println(resultString.charAt(startIndex));
 		
 		char getValue [] = new char[20];
 		int j=0;
