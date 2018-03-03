@@ -2,25 +2,25 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/bridj-0.6.3-20130316.190111-13.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/bridj-0.7-20140918.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/core-image-1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/slf4j-api-1.7.6.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/slf4j-nop-1.7.6.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/webcam-capture-0.3.10.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/Webcam jar/webcam-capture-driver-gstreamer-0.3.13-20180202.082026-3.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/h2-1.4.182.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/jgoodies-common-1.4.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/H2 IMDB Jar/mysql-connector-java-5.1.43-bin.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/core-2.4.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/gson-2.7.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/json.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/okhttp-3.4.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/jar/ClarifaiAPI jar/okio-1.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/h2-1.4.182.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/jgoodies-common-1.4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/H2 IMDB Jar/mysql-connector-java-5.1.43-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/bridj-0.6.3-20130316.190111-13.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/bridj-0.7-20140918.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/core-image-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/slf4j-nop-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/webcam-capture-0.3.10.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/Webcam jar/webcam-capture-driver-gstreamer-0.3.13-20180202.082026-3.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/json.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/okhttp-3.4.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/jar/ClarifaiAPI jar/okio-1.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

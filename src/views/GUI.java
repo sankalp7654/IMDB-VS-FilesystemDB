@@ -92,7 +92,7 @@ public class GUI extends JFrame {
 				
 				// Save image to PNG file
 				try {
-					ImageIO.write(image, "PNG", new File("/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/captured images/" + imageName + ".png"));
+					ImageIO.write(image, "PNG", new File("/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/captured images/" + imageName + ".png"));
 
 				} catch (IOException e1) {
 
@@ -100,7 +100,7 @@ public class GUI extends JFrame {
 				}
 
 				PredictAdminViaClarifaiAPI predictUser = new PredictAdminViaClarifaiAPI();
-			    response = predictUser.getResponse("/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-INMD/captured images/" + imageName + ".png");
+			    response = predictUser.getResponse("/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/captured images/" + imageName + ".png");
 				System.out.println("Predicted User: " + response);
 				
 				

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -40,27 +41,35 @@ public class IMDB_GUI extends JFrame {
 	private JTextField txt_status;
 	private JTextField txt_imdb_time;
 	private JTextField txt_filesystem_time;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-				try {
-					IMDB_GUI frame = new IMDB_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-	}
+	private String [] userDetails = new String[5];
 
 	/**
 	 * Create the frame.
 	 */
 	public IMDB_GUI() {
+		initComponents();
+	}
+	
+	public void initComponents() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IMDB_GUI.class.getResource("/resources/icon.png")));
 		getContentPane().setBackground(new Color(245, 245, 220));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("IN-Memory DataBase VS FileSystem DataBase");
 		setBounds(100, 100, 450, 535);
+	
+		
+		
+		// Creating In Memory DataBase Default Dataset
+		InMemoryDB object = new InMemoryDB();
+		Connection connection;
+		try {
+			connection = object.getConnection();
+			InMemoryDB.createDatabase(connection);
+			InMemoryDB.displayIMDB(connection);
+		} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
 		
 		pnl_insert_record = new JPanel();
@@ -70,13 +79,13 @@ public class IMDB_GUI extends JFrame {
 		getContentPane().add(pnl_insert_record, BorderLayout.NORTH);
 		
 		JLabel lbl_user_id = new JLabel("User ID:");
-		
 		JLabel lbl_user_name = new JLabel("User Name:");
-		
 		JLabel lbl_first_name = new JLabel("First Name:");
-		
 		JLabel lbl_last_name = new JLabel("Last Name:");
-		
+		JLabel lbl_gender = new JLabel("Gender:");
+		JLabel lbl_status = new JLabel("Status:");
+		JLabel lbl_password = new JLabel("Password:");
+			
 		txt_user_name = new JTextField();
 		txt_user_name.setColumns(10);
 		
@@ -89,24 +98,39 @@ public class IMDB_GUI extends JFrame {
 		txt_user_id = new JTextField();
 		txt_user_id.setColumns(10);
 		
-		JLabel lbl_gender = new JLabel("Gender:");
-		
 		txt_gender = new JTextField();
 		txt_gender.setColumns(10);
 		
-		JLabel lbl_password = new JLabel("Password:");
-		
 		txt_password = new JTextField();
 		txt_password.setColumns(10);
-		
-		JLabel lbl_status = new JLabel("Status:");
-		
+			
 		txt_status = new JTextField();
 		txt_status.setColumns(10);
 		
 		JButton btnInsertIntoImdb = new JButton("INSERT INTO IMDB");
 		btnInsertIntoImdb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int userId = Integer.parseInt(txt_user_id.getText());
+				userDetails[0] = txt_user_name.getText().toString();
+				userDetails[1] = txt_first_name.getText().toString();
+				userDetails[2] = txt_last_name.getText().toString();
+				userDetails[3] = txt_gender.getText().toString();
+				userDetails[4] = txt_password.getText().toString();
+				int status = Integer.parseInt(txt_status.getText());
+				try {
+					Connection connection = object.getConnection();
+					// Returned Time is in nanoseconds
+					long execTime = InMemoryDB.insertIntoIMDB(connection, userDetails, userId, status);
+					JOptionPane.showMessageDialog(null, "Record has been Inserted Successfully !", "Success", JOptionPane.DEFAULT_OPTION);
+					// Displaying exection time in milli-seconds 
+					txt_imdb_time.setText(Long.toString(execTime/1000) + " µs");
+					// InMemoryDB.displayIMDB(connection);
+					connection.close();
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+				
 			}
 		});
 		
@@ -227,19 +251,9 @@ public class IMDB_GUI extends JFrame {
 		);
 		pnl_time_elapsed.setLayout(gl_pnl_time_elapsed);
 		
-		JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();	
 		setJMenuBar(menuBar);
 		
-		// Creating In Memory DataBase Default Dataset
-		try {
-			InMemoryDB object = new InMemoryDB();
-			Connection connection = object.getConnectionObject();
-			InMemoryDB.displayIMDB(connection);
-			connection.close();
-			
-		} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
-}
+	}
