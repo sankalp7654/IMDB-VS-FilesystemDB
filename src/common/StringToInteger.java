@@ -1,3 +1,4 @@
+package common;
 public class StringToInteger {
 	
 	public double parseInt(char number[]) {
