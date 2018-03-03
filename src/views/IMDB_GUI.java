@@ -2,6 +2,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import common.InMemoryDB;
@@ -55,7 +55,7 @@ public class IMDB_GUI extends JFrame {
 		getContentPane().setBackground(new Color(245, 245, 220));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("IN-Memory DataBase VS FileSystem DataBase");
-		setBounds(100, 100, 450, 535);
+		setBounds(100, 100, 450, 574);
 	
 		
 		
@@ -73,18 +73,25 @@ public class IMDB_GUI extends JFrame {
 	
 		
 		pnl_insert_record = new JPanel();
-		pnl_insert_record.setPreferredSize(new Dimension(200, 370));
+		pnl_insert_record.setPreferredSize(new Dimension(200, 365));
 		pnl_insert_record.setOpaque(false);
-		pnl_insert_record.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "INSERT RECORD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnl_insert_record.setBorder(new TitledBorder(null, "INSERT RECORD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(pnl_insert_record, BorderLayout.NORTH);
 		
 		JLabel lbl_user_id = new JLabel("User ID:");
+		lbl_user_id.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_user_name = new JLabel("User Name:");
+		lbl_user_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_first_name = new JLabel("First Name:");
+		lbl_first_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_last_name = new JLabel("Last Name:");
+		lbl_last_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_gender = new JLabel("Gender:");
+		lbl_gender.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_status = new JLabel("Status:");
+		lbl_status.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		JLabel lbl_password = new JLabel("Password:");
+		lbl_password.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 			
 		txt_user_name = new JTextField();
 		txt_user_name.setColumns(10);
@@ -143,8 +150,8 @@ public class IMDB_GUI extends JFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnInsertIntoImdb, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnInsertIntoFilesystem))
+							.addGap(18)
+							.addComponent(btnInsertIntoFilesystem, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(28)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -212,29 +219,58 @@ public class IMDB_GUI extends JFrame {
 		getContentPane().add(pnl_time_elapsed, BorderLayout.CENTER);
 		
 		JLabel lbl_imdb_time = new JLabel("In Memory DataBase:");
+		lbl_imdb_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
 		txt_imdb_time = new JTextField();
 		txt_imdb_time.setEditable(false);
 		txt_imdb_time.setColumns(10);
 		
 		JLabel lbl_file_system_time = new JLabel("File System:");
+		lbl_file_system_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
 		txt_filesystem_time = new JTextField();
 		txt_filesystem_time.setEditable(false);
 		txt_filesystem_time.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Exit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		JButton btnNewButton_1 = new JButton("Clear");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txt_user_id.setText("");
+				txt_user_name.setText("");
+				txt_first_name.setText("");
+				txt_last_name.setText("");
+				txt_gender.setText("");
+				txt_password.setText("");
+				txt_status.setText("");
+				txt_imdb_time.setText("");
+				txt_filesystem_time.setText("");
+				
+			}
+		});
 		GroupLayout gl_pnl_time_elapsed = new GroupLayout(pnl_time_elapsed);
 		gl_pnl_time_elapsed.setHorizontalGroup(
-			gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING)
+			gl_pnl_time_elapsed.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnl_time_elapsed.createSequentialGroup()
 					.addGap(28)
 					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING)
 						.addComponent(lbl_imdb_time)
 						.addComponent(lbl_file_system_time, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(txt_filesystem_time)
-						.addComponent(txt_imdb_time, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
-					.addGap(46))
+					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_pnl_time_elapsed.createSequentialGroup()
+							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnNewButton))
+						.addComponent(txt_filesystem_time, Alignment.LEADING)
+						.addComponent(txt_imdb_time, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+					.addGap(38))
 		);
 		gl_pnl_time_elapsed.setVerticalGroup(
 			gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING)
@@ -247,7 +283,11 @@ public class IMDB_GUI extends JFrame {
 					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbl_file_system_time)
 						.addComponent(txt_filesystem_time, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(34, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		pnl_time_elapsed.setLayout(gl_pnl_time_elapsed);
 		
