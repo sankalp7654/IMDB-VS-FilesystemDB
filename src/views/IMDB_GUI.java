@@ -459,6 +459,25 @@ public class IMDB_GUI extends JFrame {
 		});
 		
 		JButton btn_search_in_filesystemdb = new JButton("SEARCH IN FILESYSTEM");
+		btn_search_in_filesystemdb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int userId = Integer.parseInt(txt_search_user_id.getText());
+				String [] userDetails = new String[7];
+				userDetails = FileSystemDB.search(userId);
+				
+				if(FileSystemDB.flag == true) {
+					txt_user_name.setText(userDetails[1]);
+					txt_first_name.setText(userDetails[2]);
+					txt_last_name.setText(userDetails[3]);
+					txt_gender.setText(userDetails[4]);
+					txt_password.setText(userDetails[5]);
+					txt_status.setText(userDetails[6]);
+					txt_search_filesystem_time.setText(Long.toString(FileSystemDB.searchTime));
+				
+				}
+				
+			}
+		});
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
