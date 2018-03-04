@@ -1,11 +1,8 @@
 package views;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,14 +12,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
+import common.FileSystemDB;
 import common.InMemoryDB;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IMDB_GUI extends JFrame {
 
@@ -30,18 +30,16 @@ public class IMDB_GUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel pnl_insert_record;
-	private JPanel pnl_time_elapsed;
+	private JTextField txt_user_id;
 	private JTextField txt_user_name;
 	private JTextField txt_first_name;
 	private JTextField txt_last_name;
-	private JTextField txt_user_id;
 	private JTextField txt_gender;
 	private JTextField txt_password;
 	private JTextField txt_status;
-	private JTextField txt_imdb_time;
+	private JPanel panel_2;
 	private JTextField txt_filesystem_time;
-	private String [] userDetails = new String[5];
+	private JTextField txt_imdb_time;
 
 	/**
 	 * Create the frame.
@@ -55,7 +53,7 @@ public class IMDB_GUI extends JFrame {
 		getContentPane().setBackground(new Color(245, 245, 220));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("IN-Memory DataBase VS FileSystem DataBase");
-		setBounds(100, 100, 450, 574);
+		setBounds(100, 100, 520, 646);
 	
 		
 		
@@ -70,53 +68,79 @@ public class IMDB_GUI extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	
 		
-		pnl_insert_record = new JPanel();
-		pnl_insert_record.setPreferredSize(new Dimension(200, 365));
-		pnl_insert_record.setOpaque(false);
-		pnl_insert_record.setBorder(new TitledBorder(null, "INSERT RECORD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		getContentPane().add(pnl_insert_record, BorderLayout.NORTH);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(35, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 610, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(31, Short.MAX_VALUE))
+		);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(245, 255, 250));
+		tabbedPane.addTab("INSERT", null, panel, null);
+		
+		panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 239, 213));
+		panel_2.setSize(new Dimension(300, 100));
+		panel_2.setBorder(new TitledBorder(null, "INSERT RECORD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		JLabel lbl_user_id = new JLabel("User ID:");
 		lbl_user_id.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_user_name = new JLabel("User Name:");
-		lbl_user_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_first_name = new JLabel("First Name:");
-		lbl_first_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_last_name = new JLabel("Last Name:");
-		lbl_last_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_gender = new JLabel("Gender:");
-		lbl_gender.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_status = new JLabel("Status:");
-		lbl_status.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		JLabel lbl_password = new JLabel("Password:");
-		lbl_password.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			
-		txt_user_name = new JTextField();
-		txt_user_name.setColumns(10);
-		
-		txt_first_name = new JTextField();
-		txt_first_name.setColumns(10);
-		
-		txt_last_name = new JTextField();
-		txt_last_name.setColumns(10);
 		
 		txt_user_id = new JTextField();
 		txt_user_id.setColumns(10);
 		
+		JLabel lbl_user_name = new JLabel("User Name:");
+		lbl_user_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		txt_user_name = new JTextField();
+		txt_user_name.setColumns(10);
+		
+		JLabel lbl_first_name = new JLabel("First Name:");
+		lbl_first_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		txt_first_name = new JTextField();
+		txt_first_name.setColumns(10);
+		
+		JLabel lbl_last_name = new JLabel("Last Name:");
+		lbl_last_name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		txt_last_name = new JTextField();
+		txt_last_name.setColumns(10);
+		
+		JLabel lbl_gender = new JLabel("Gender:");
+		lbl_gender.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
 		txt_gender = new JTextField();
 		txt_gender.setColumns(10);
 		
+		JLabel lbl_password = new JLabel("Password:");
+		lbl_password.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
 		txt_password = new JTextField();
 		txt_password.setColumns(10);
-			
+		
+		JLabel lbl_status = new JLabel("Status:");
+		lbl_status.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
 		txt_status = new JTextField();
 		txt_status.setColumns(10);
 		
-		JButton btnInsertIntoImdb = new JButton("INSERT INTO IMDB");
-		btnInsertIntoImdb.addActionListener(new ActionListener() {
+		JButton button = new JButton("INSERT INTO IMDB");
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String userDetails[] = new String[5];
 				int userId = Integer.parseInt(txt_user_id.getText());
 				userDetails[0] = txt_user_name.getText().toString();
 				userDetails[1] = txt_first_name.getText().toString();
@@ -129,118 +153,153 @@ public class IMDB_GUI extends JFrame {
 					// Returned Time is in nanoseconds
 					long execTime = InMemoryDB.insertIntoIMDB(connection, userDetails, userId, status);
 					JOptionPane.showMessageDialog(null, "Record has been Inserted Successfully !", "Success", JOptionPane.DEFAULT_OPTION);
-					// Displaying exection time in milli-seconds 
+					// Displaying execution time in µ-seconds 
 					txt_imdb_time.setText(Long.toString(execTime/1000) + " µs");
 					// InMemoryDB.displayIMDB(connection);
 					connection.close();
 				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}				
-				
+				}		
 			}
 		});
 		
-		JButton btnInsertIntoFilesystem = new JButton("INSERT INTO FILESYSTEM");
-		GroupLayout gl_panel = new GroupLayout(pnl_insert_record);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnInsertIntoImdb, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnInsertIntoFilesystem, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(28)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(lbl_user_name, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lbl_user_id, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-								.addComponent(lbl_first_name, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbl_last_name)
-								.addComponent(lbl_gender)
-								.addComponent(lbl_password)
-								.addComponent(lbl_status))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(txt_status, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-								.addComponent(txt_password, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-								.addComponent(txt_gender, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-								.addComponent(txt_user_id, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-								.addComponent(txt_last_name, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-								.addComponent(txt_first_name, 282, 282, Short.MAX_VALUE)
-								.addComponent(txt_user_name, 282, 282, Short.MAX_VALUE))))
-					.addGap(38))
+		JButton button_1 = new JButton("INSERT INTO FILESYSTEM");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String userDetails[] = new String[7];
+				userDetails[0] = txt_user_id.getText().toString();
+				userDetails[1] = txt_user_name.getText().toString();
+				userDetails[2] = txt_first_name.getText().toString();
+				userDetails[3] = txt_last_name.getText().toString();
+				userDetails[4] = txt_gender.getText().toString();
+				userDetails[5] = txt_password.getText().toString();
+				userDetails[6] = txt_status.getText();
+				try {
+					Connection connection = object.getConnection();
+					// Returned Time is in nanoseconds
+					long execTime = FileSystemDB.insertIntoFileSystemDB(userDetails);
+					JOptionPane.showMessageDialog(null, "Record has been Inserted Successfully !", "Success", JOptionPane.DEFAULT_OPTION);
+					// Displaying execution time in µ-seconds 
+					txt_filesystem_time.setText(Long.toString(execTime/1000) + " µs");
+					// InMemoryDB.displayIMDB(connection);
+					connection.close();
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}		
+			}
+		});
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 468, Short.MAX_VALUE)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_user_id, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+					.addGap(12)
+					.addComponent(txt_user_id, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_user_name)
+					.addGap(12)
+					.addComponent(txt_user_name, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_first_name, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+					.addGap(12)
+					.addComponent(txt_first_name, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_last_name)
+					.addGap(16)
+					.addComponent(txt_last_name, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_gender)
+					.addGap(36)
+					.addComponent(txt_gender, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_password)
+					.addGap(21)
+					.addComponent(txt_password, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lbl_status)
+					.addGap(44)
+					.addComponent(txt_status, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(43)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 546, Short.MAX_VALUE)
+				.addGroup(gl_panel_2.createSequentialGroup()
 					.addGap(15)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_user_id)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_user_id))
 						.addComponent(txt_user_id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_user_name)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_user_name))
 						.addComponent(txt_user_name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_first_name)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_first_name))
 						.addComponent(txt_first_name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_last_name)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_last_name))
 						.addComponent(txt_last_name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_gender)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_gender))
 						.addComponent(txt_gender, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_password)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_password))
 						.addComponent(txt_password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_status)
+					.addGap(12)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lbl_status))
 						.addComponent(txt_status, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnInsertIntoImdb, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnInsertIntoFilesystem, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
-					.addGap(28))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
 		);
-		pnl_insert_record.setLayout(gl_panel);
+		panel_2.setLayout(gl_panel_2);
 		
-		pnl_time_elapsed = new JPanel();
-		pnl_time_elapsed.setBackground(new Color(204, 255, 204));
-		pnl_time_elapsed.setBorder(new TitledBorder(null, "TIME ELAPSED", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(pnl_time_elapsed, BorderLayout.CENTER);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "TIME ELAPSED", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBackground(new Color(204, 255, 204));
 		
 		JLabel lbl_imdb_time = new JLabel("In Memory DataBase:");
 		lbl_imdb_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
-		txt_imdb_time = new JTextField();
-		txt_imdb_time.setEditable(false);
-		txt_imdb_time.setColumns(10);
+		JLabel lbl_filesystem_time = new JLabel("File System:");
+		lbl_filesystem_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
-		JLabel lbl_file_system_time = new JLabel("File System:");
-		lbl_file_system_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		
-		txt_filesystem_time = new JTextField();
-		txt_filesystem_time.setEditable(false);
-		txt_filesystem_time.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Exit");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		JButton btnNewButton_1 = new JButton("Clear");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton button_2 = new JButton("Clear");
+		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txt_user_id.setText("");
 				txt_user_name.setText("");
@@ -251,48 +310,85 @@ public class IMDB_GUI extends JFrame {
 				txt_status.setText("");
 				txt_imdb_time.setText("");
 				txt_filesystem_time.setText("");
-				
 			}
 		});
-		GroupLayout gl_pnl_time_elapsed = new GroupLayout(pnl_time_elapsed);
-		gl_pnl_time_elapsed.setHorizontalGroup(
-			gl_pnl_time_elapsed.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_pnl_time_elapsed.createSequentialGroup()
+		
+		JButton button_3 = new JButton("Exit");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		txt_filesystem_time = new JTextField();
+		txt_filesystem_time.setEditable(false);
+		txt_filesystem_time.setColumns(10);
+		
+		txt_imdb_time = new JTextField();
+		txt_imdb_time.setEditable(false);
+		txt_imdb_time.setColumns(10);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 485, Short.MAX_VALUE)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(28)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(lbl_imdb_time)
-						.addComponent(lbl_file_system_time, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(gl_pnl_time_elapsed.createSequentialGroup()
-							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lbl_filesystem_time, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(button_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton))
+							.addComponent(button_3))
 						.addComponent(txt_filesystem_time, Alignment.LEADING)
 						.addComponent(txt_imdb_time, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
 					.addGap(38))
 		);
-		gl_pnl_time_elapsed.setVerticalGroup(
-			gl_pnl_time_elapsed.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnl_time_elapsed.createSequentialGroup()
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 602, Short.MAX_VALUE)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(15)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbl_imdb_time)
 						.addComponent(txt_imdb_time, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_file_system_time)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbl_filesystem_time)
 						.addComponent(txt_filesystem_time, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pnl_time_elapsed.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(453, Short.MAX_VALUE))
 		);
-		pnl_time_elapsed.setLayout(gl_pnl_time_elapsed);
+		panel_1.setLayout(gl_panel_1);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panel_1, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addComponent(panel_2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 471, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(30, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(31, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		
-		JMenuBar menuBar = new JMenuBar();	
-		setJMenuBar(menuBar);
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("SEARCH", null, panel_3, null);
+		getContentPane().setLayout(groupLayout);
 		
 		
 	}
