@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,13 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import common.FileSystemDB;
 import common.InMemoryDB;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.EtchedBorder;
 
 public class IMDB_GUI extends JFrame {
 
@@ -63,15 +63,14 @@ public class IMDB_GUI extends JFrame {
 		getContentPane().setBackground(new Color(245, 245, 220));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("IN-Memory DataBase VS FileSystem DataBase");
-		setBounds(100, 100, 520, 646);
+		setBounds(100, 100, 519, 646);
 	
 		
 		
 		// Creating In Memory DataBase Default Dataset
-		InMemoryDB object = new InMemoryDB();
 		Connection connection;
 		try {
-			connection = object.getConnection();
+			connection = InMemoryDB.getConnection();
 			InMemoryDB.createDatabase(connection);
 			InMemoryDB.displayIMDB(connection);
 		} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
@@ -159,7 +158,7 @@ public class IMDB_GUI extends JFrame {
 				userDetails[4] = txt_password.getText().toString();
 				int status = Integer.parseInt(txt_status.getText());
 				try {
-					Connection connection = object.getConnection();
+					Connection connection = InMemoryDB.getConnection();
 					// Returned Time is in nanoseconds
 					long execTime = InMemoryDB.insertIntoIMDB(connection, userDetails, userId, status);
 					JOptionPane.showMessageDialog(null, "Record has been Inserted Successfully !", "Success", JOptionPane.DEFAULT_OPTION);
@@ -186,7 +185,7 @@ public class IMDB_GUI extends JFrame {
 				userDetails[5] = txt_password.getText().toString();
 				userDetails[6] = txt_status.getText();
 				try {
-					Connection connection = object.getConnection();
+					Connection connection = InMemoryDB.getConnection();
 					// Returned Time is in nanoseconds
 					long execTime = FileSystemDB.insertIntoFileSystemDB(userDetails);
 					JOptionPane.showMessageDialog(null, "Record has been Inserted Successfully !", "Success", JOptionPane.DEFAULT_OPTION);
@@ -412,6 +411,52 @@ public class IMDB_GUI extends JFrame {
 		txt_search_user_id.setColumns(10);
 		
 		JButton btn_search_insert_in_imdb = new JButton("SEARCH IN IMDB");
+		btn_search_insert_in_imdb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int userId = Integer.parseInt(txt_search_user_id.getText().toString());
+				
+					Connection connection;
+					try {
+						connection = InMemoryDB.getConnection();
+						String [] record = InMemoryDB.search(connection, userId);
+						if((record[8].compareTo("found")) == 0) {
+							
+							txt_search_username.setText(record[1]);
+							txt_search_first_name.setText(record[2]);
+							txt_search_last_name.setText(record[3]);
+							txt_search_gender.setText(record[4]);
+							txt_search_password.setText(record[5]);
+							txt_search_status.setText(record[6]);
+							txt_search_imdb_time.setText(record[7] + " µs");
+							
+							JOptionPane.showMessageDialog(null, "Record Found!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+						}
+						else {
+							
+							txt_search_username.setText("N/A");
+							txt_search_first_name.setText("N/A");
+							txt_search_last_name.setText("N/A");
+							txt_search_gender.setText("N/A");
+							txt_search_password.setText("N/A");
+							txt_search_status.setText("N/A");
+							txt_search_imdb_time.setText(record[7] + " µs");
+							JOptionPane.showMessageDialog(null, "Record Not Found!", "Unsuccess", JOptionPane.ERROR_MESSAGE);
+							
+						}
+						connection.close();
+					} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					}
+	
+				
+				
+				
+			}
+		});
 		
 		JButton btn_search_in_filesystemdb = new JButton("SEARCH IN FILESYSTEM");
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
@@ -460,8 +505,26 @@ public class IMDB_GUI extends JFrame {
 		lbl_search_filesystem_time.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
 		JButton btn_search_clear = new JButton("Clear");
+		btn_search_clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txt_search_user_id.setText("");
+				txt_search_username.setText("");
+				txt_search_first_name.setText("");
+				txt_search_last_name.setText("");
+				txt_search_gender.setText("");
+				txt_search_status.setText("");
+				txt_search_password.setText("");
+				txt_search_imdb_time.setText("");
+				txt_search_filesystem_time.setText("");
+			}
+		});
 		
 		JButton btn_search_exit = new JButton("Exit");
+		btn_search_exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		txt_search_filesystem_time = new JTextField();
 		txt_search_filesystem_time.setEditable(false);

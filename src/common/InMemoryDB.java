@@ -20,7 +20,7 @@ public class InMemoryDB {
     private static String password = "";
     public static long createTime, searchTime;
     
-    public Connection getConnection() throws ClassNotFoundException, SQLException, FileNotFoundException {
+    public static Connection getConnection() throws ClassNotFoundException, SQLException, FileNotFoundException {
      	Class.forName("org.h2.Driver");	
    		Connection connection =  DriverManager.getConnection(url, username, password);
    		return connection;
@@ -118,10 +118,10 @@ public class InMemoryDB {
     }
 
    
-     public static void search(Connection connection, int user_id) throws SQLException {
+     public static String[] search(Connection connection, int user_id) throws SQLException {
 
     	  	//start 
- 	    long startCreateTime = System.nanoTime();
+ 	    long startTime = System.nanoTime();
 
          PreparedStatement searchPreparedStatement = null;
          String SearchQuery = "select * from user_details where user_id = ? ";
@@ -131,23 +131,38 @@ public class InMemoryDB {
          ResultSet rs = searchPreparedStatement.executeQuery();
 		 rs.next();
 		 
+		 String record[] = new String[9];
+		 record[8] = "not found";
+		 
          try {
 				 if(rs.getInt("user_id") == user_id) {
-			           System.out.println(rs.getInt(1) + "  "+ rs.getString(2) + "  "+ rs.getString(3) + "  " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getInt(7));
+					 // Here capacity of array is 9 (first 7 columns for details of record, 8th column for time elapsed and 9th column is to store status of search)
+			         record[0] = rs.getString(1);
+			         record[1] = rs.getString(2);
+			         record[2] = rs.getString(3);
+			         record[3] = rs.getString(4);
+			         record[4] = rs.getString(5);
+			         record[5] = rs.getString(6);
+			         record[6] = rs.getString(7);
+			         record[8] = "found";
+			        	 System.out.println(rs.getInt(1) + "  "+ rs.getString(2) + "  "+ rs.getString(3) + "  " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getInt(7));
 			 	}
+				 long endTime = System.nanoTime();
+		         
+			 	    //time elapsed
+			 	    searchTime = endTime - startTime;
+			 	    // contains converted time in µs
+			 	    record[7] = Long.toString(searchTime/1000);
+			 	    System.out.println("Elapsed time in µs: " + (searchTime/1000));
+			 	   
+			        searchPreparedStatement.close();
+			        return (record);
 		} catch (Exception e) {
 			System.out.println("No data found");
 			//			e.printStackTrace();
 		}
         
-         long endCreateTime = System.nanoTime();
-         
- 	    //time elapsed
- 	     searchTime = endCreateTime - startCreateTime;
-   
- 	    System.out.println("Elapsed time in milliseconds: " + searchTime/1000000);
- 	   
-        searchPreparedStatement.close();
+         return record;
     }
    
 }
