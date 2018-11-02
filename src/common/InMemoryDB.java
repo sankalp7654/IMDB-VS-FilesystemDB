@@ -35,7 +35,7 @@ public class InMemoryDB {
     			
 	    // Insert Default Data using File InsertDefaultData.txt
 	    @SuppressWarnings("resource")
-	    String InsertDefaultData = new Scanner(new File("/Users/Sandeep/Documents/eclipse-workspace/FaceAuth-IMDB/src/resources/InsertDefaultData.txt")).useDelimiter("\\A").next();
+	    String InsertDefaultData = new Scanner(new File("/Users/Sandeep/Documents/eclipse-workspace/IMDB-VS-FilesystemDB-master/src/resources/InsertDefaultData.txt")).useDelimiter("\\A").next();
     		       
     			
 	    PreparedStatement createTable = connection.prepareStatement(CreateDB);		
