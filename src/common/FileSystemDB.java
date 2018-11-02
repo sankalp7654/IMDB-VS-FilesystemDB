@@ -44,7 +44,7 @@ public class FileSystemDB {
 			fileWriter.close();
 			
 			long endTime = System.nanoTime();
-			System.out.println((endTime-startTime)/1000 + " ??s");
+			System.out.println((endTime-startTime)/1000 + " µs");
 			return (endTime-startTime);
 		
 
@@ -75,6 +75,7 @@ public class FileSystemDB {
 					System.out.println("found");
 					System.out.println(record[0] + " " + record[1] + " " + record[2]);
 					System.out.println(endTime-startTime);
+					break;
 				}
 				else {
 					flag = true;
