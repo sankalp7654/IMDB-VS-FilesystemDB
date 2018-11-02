@@ -36,7 +36,7 @@ public class FileSystemDB {
 		long startTime = System.nanoTime();
 		try {
 			
-			FileWriter fileWriter = new FileWriter("/Users/Sandeep/Downloads/test.csv", true);
+			FileWriter fileWriter = new FileWriter("/Users/Sandeep/Documents/eclipse-workspace/IMDB-VS-FilesystemDB-master/src/resources/user_details.csv", true);
 			CSVWriter object = new CSVWriter(fileWriter);
 			object.writeNext(userDetails);
 					
@@ -44,7 +44,7 @@ public class FileSystemDB {
 			fileWriter.close();
 			
 			long endTime = System.nanoTime();
-			System.out.println((endTime-startTime)/1000 + " µs");
+			System.out.println((endTime-startTime)/1000 + " ??s");
 			return (endTime-startTime);
 		
 
@@ -57,17 +57,18 @@ public class FileSystemDB {
 		long startTime = System.nanoTime();
 		FileReader file;
 		try {
-			file = new FileReader(new File("/Users/Sandeep/Downloads/test.csv"));
+			file = new FileReader(new File("/Users/Sandeep/Documents/eclipse-workspace/IMDB-VS-FilesystemDB-master/src/resources/user_details.csv"));
 			CSVReader object = new CSVReader(file);
 			
 			String record[] = new String[7];
+			object.readNext();
 			while((record = object.readNext()) != null) {
 			
 				System.out.println(record[0] + " " + record[1] + " " + record[2]);
 
 				if((Integer.parseInt(record[0])) == userId) {
 					flag = true;
-					record[8] = "found";
+				//	record[8] = "found";
 					long endTime = System.nanoTime();
 					searchTime = (endTime-startTime)/1000;
 
@@ -104,7 +105,7 @@ public class FileSystemDB {
 	public static long displayFileSystemDB() {
 		long startTime = System.nanoTime();
 		try {
-				File file = new File("/Users/Sandeep/Downloads/test.csv");
+				File file = new File("/Users/Sandeep/Documents/eclipse-workspace/IMDB-VS-FilesystemDB-master/src/resources/user_details.csv");
 
 				FileReader fileReader = new FileReader(file);
 				CSVReader object = new CSVReader(fileReader);
@@ -119,7 +120,7 @@ public class FileSystemDB {
 				object.close();
 		
 				long endTime = System.nanoTime();
-				System.out.println((endTime-startTime)/1000 + " µs");
+				System.out.println((endTime-startTime)/1000 + " ??s");
 				return (endTime-startTime);
 			} catch (IOException e) {
 				e.printStackTrace();
