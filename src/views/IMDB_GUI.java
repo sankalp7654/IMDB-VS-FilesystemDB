@@ -466,13 +466,16 @@ public class IMDB_GUI extends JFrame {
 				userDetails = FileSystemDB.search(userId);
 				
 				if(FileSystemDB.flag == true) {
-					txt_user_name.setText(userDetails[1]);
-					txt_first_name.setText(userDetails[2]);
-					txt_last_name.setText(userDetails[3]);
-					txt_gender.setText(userDetails[4]);
-					txt_password.setText(userDetails[5]);
-					txt_status.setText(userDetails[6]);
-					txt_search_filesystem_time.setText(Long.toString(FileSystemDB.searchTime));
+					txt_search_username.setText(userDetails[1]);
+					txt_search_first_name.setText(userDetails[2]);
+					txt_search_last_name.setText(userDetails[3]);
+					txt_search_gender.setText(userDetails[4]);
+					txt_search_password.setText(userDetails[5]);
+					txt_search_status.setText(userDetails[6]);
+					txt_search_filesystem_time.setText(Long.toString(FileSystemDB.searchTime) + " µs");
+					
+					JOptionPane.showMessageDialog(null, "Record Found!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
 				
 				}
 				
